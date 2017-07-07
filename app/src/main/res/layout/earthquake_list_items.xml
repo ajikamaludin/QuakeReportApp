@@ -10,13 +10,19 @@
 
     <TextView
         android:id="@+id/mag"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        tools:text="7.2" />
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/magnitude_circle"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        tools:text="8.9" />
 
     <TextView
         android:id="@+id/position"
+        android:layout_marginLeft="16dp"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"

@@ -22,4 +22,34 @@
 
     <!-- Accent color of the app -->
     <color name="colorAccent">#10CAC9</color>
+
+    <!-- Warna untuk gempa magnitudo 0 sampai 2 -->
+    <color name="magnitude1">#4A7BA7</color>
+
+    <!-- Warna lingkaran magnitudo untuk gempa antara 2 sampai 3 -->
+    <color name="magnitude2">#04B4B3</color>
+
+    <!-- Warna lingkaran magnitudo untuk gempa antara 3 sampai 4 -->
+    <color name="magnitude3">#10CAC9</color>
+
+    <!-- Warna lingkaran magnitudo untuk gempa antara 4 sampai 5 -->
+    <color name="magnitude4">#F5A623</color>
+
+    <!-- Warna lingkaran magnitudo untuk gempa antara 5 sampai 6 -->
+    <color name="magnitude5">#FF7D50</color>
+
+    <!-- Warna lingkaran magnitudo untuk gempa antara 6 sampai 7 -->
+    <color name="magnitude6">#FC6644</color>
+
+    <!-- Warna lingkaran magnitudo untuk gempa antara 7 sampai 8 -->
+    <color name="magnitude7">#E75F40</color>
+
+    <!-- Warna lingkaran magnitudo untuk gempa antara 8 sampai 9 -->
+    <color name="magnitude8">#E13A20</color>
+
+    <!-- Warna lingkaran magnitudo untuk gempa antara 9 sampai 10 -->
+    <color name="magnitude9">#D93218</color>
+
+    <!-- Warna lingkaran magnitudo untuk gempa antara lebih dari 10 -->
+    <color name="magnitude10plus">#C03823</color>
 </resources>

@@ -65,7 +65,7 @@ public final class QueryUtils {
                 JSONObject x = features.getJSONObject(i);
                 JSONObject properties = x.getJSONObject("properties");
 
-                String magnetude = properties.getString("mag");
+                double magnetude = properties.getDouble("mag");
                 String location = properties.getString("place");
                 long timeInMilliseconds = properties.getLong("time");
 

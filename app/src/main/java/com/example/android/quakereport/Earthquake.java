@@ -8,7 +8,7 @@ public class Earthquake {
     /*
     Private Data of Magnetido
      */
-    private String mMag;
+    private double mMag;
 
     /*
     Private Data of City Name
@@ -29,7 +29,7 @@ public class Earthquake {
     /*
     This is Construktor
      */
-    public Earthquake(String mag, String city, long date){
+    public Earthquake(double mag, String city, long date){
         mMag = mag;
         mCityName = city;
         mTimeInMillisecond = date;
@@ -38,7 +38,7 @@ public class Earthquake {
     /*
     get method for getmag
      */
-    public String getMag(){
+    public double getMag(){
         return mMag;
     }
 

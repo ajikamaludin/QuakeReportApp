@@ -1,6 +1,9 @@
 package com.example.android.quakereport;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.icu.text.DecimalFormat;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -27,6 +30,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         super(context, 0, word);
     }
 
+    @TargetApi(Build.VERSION_CODES.N)
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -41,12 +45,19 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
          */
         Earthquake earthquake = getItem(position);
 
+
+        /*
+        Decimal number formatting
+         */
+        DecimalFormat formatter = new DecimalFormat("0.0");
+        String vMagnetudo = formatter.format(earthquake.getMag());
+
         /*
         Magnetudo TextView and SetText
          */
         TextView magnetido = (TextView) listItemView.findViewById(R.id.mag);
 
-        magnetido.setText(earthquake.getMag());
+        magnetido.setText(vMagnetudo);
 
         /*
         get location name

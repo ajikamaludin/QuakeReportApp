@@ -20,14 +20,19 @@ public class Earthquake {
      */
     private String mDate;
 
+    /*
+    private long mTimeInMillisecond
+     */
+    private long mTimeInMillisecond;
+
 
     /*
     This is Construktor
      */
-    public Earthquake(String mag, String city, String date){
+    public Earthquake(String mag, String city, long date){
         mMag = mag;
         mCityName = city;
-        mDate = date;
+        mTimeInMillisecond = date;
     }
 
     /*
@@ -49,6 +54,13 @@ public class Earthquake {
      */
     public String getDate(){
         return mDate;
+    }
+
+    /*
+    get time in millisecond
+     */
+    public long getTimeMillisecond(){
+        return mTimeInMillisecond;
     }
 
 }

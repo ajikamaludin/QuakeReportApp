@@ -1,8 +1,5 @@
 package com.example.android.quakereport;
 
-/**
- * Created by aji on 07/07/17.
- */
 
 import android.util.Log;
 
@@ -68,14 +65,14 @@ public final class QueryUtils {
                 double magnetude = properties.getDouble("mag");
                 String location = properties.getString("place");
                 long timeInMilliseconds = properties.getLong("time");
-
+                String url = properties.getString("url");
                 /*Date dateObject = new Date(timeInMilliseconds);
 
                 SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
                 String dateToDisplay = dateFormatter.format(dateObject);
                 */
 
-                earthquakes.add(new Earthquake(magnetude,location,timeInMilliseconds));
+                earthquakes.add(new Earthquake(magnetude,location,timeInMilliseconds,url));
             }
 
         } catch (JSONException e) {

@@ -52,4 +52,10 @@
 
     <!-- Warna lingkaran magnitudo untuk gempa antara lebih dari 10 -->
     <color name="magnitude10plus">#C03823</color>
+
+    <!-- Warna teks untuk rincian gempa di list item -->
+    <color name="textColorEarthquakeDetails">#B4BAC0</color>
+
+    <!-- Warna teks untuk lokasi primer gempa di list item -->
+    <color name="textColorEarthquakeLocation">#2B3D4D</color>
 </resources>

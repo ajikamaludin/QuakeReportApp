@@ -1,9 +1,5 @@
 package com.example.android.quakereport;
 
-/**
- * Created by aji on 06/07/17.
- */
-
 public class Earthquake {
     /*
     Private Data of Magnetido
@@ -25,14 +21,19 @@ public class Earthquake {
      */
     private long mTimeInMillisecond;
 
+    /*
+    Private URL discription
+     */
+    private String mUrl;
 
     /*
     This is Construktor
      */
-    public Earthquake(double mag, String city, long date){
+    public Earthquake(double mag, String city, long date,String url){
         mMag = mag;
         mCityName = city;
         mTimeInMillisecond = date;
+        mUrl = url;
     }
 
     /*
@@ -61,6 +62,13 @@ public class Earthquake {
      */
     public long getTimeMillisecond(){
         return mTimeInMillisecond;
+    }
+
+    /*
+    get url data
+     */
+    public String getUrl(){
+        return mUrl;
     }
 
 }

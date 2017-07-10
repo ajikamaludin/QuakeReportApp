@@ -15,4 +15,11 @@
 -->
 <resources>
     <string name="app_name">Quake Report</string>
+    <string name="kosong">Tidak Ada Data Yang Ditampilkan</string>
+    <string name="tidakAdaKoneksi">Tidak Ada Koneksi Internet</string>
+    <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
+    <string name="settings_menu_item">Settings</string>
+    <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
+    <string name="settings_title">Earthquake Settings</string>
+
 </resources>

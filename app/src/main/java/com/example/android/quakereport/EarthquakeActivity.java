@@ -15,26 +15,45 @@
  */
 package com.example.android.quakereport;
 
+import android.app.LoaderManager;
+import android.content.AsyncTaskLoader;
+import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EarthquakeActivity extends AppCompatActivity {
+public class EarthquakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Earthquake>> {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
+    private static final int EARTHQUAKE_LOADER_ID = 1;
+
     private EarthquakeAdapter mAdapter;
 
+    private TextView emptyView;
+
+    private ListView earthquakeListView;
+
+    private ProgressBar progressBar;
+
     private static final String USGS_REQUEST_URL =
-            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=3&limit=100";
+            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&limit=5";
 
     //private ArrayList<Earthquake> earthquakes;
 
@@ -54,7 +73,13 @@ public class EarthquakeActivity extends AppCompatActivity {
         earthquakes.add(new Earthquake("1.6","Paris","Oct 30,2011"));*/
 
         // Cari referensi pada {@link ListView} pada layout
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        earthquakeListView = (ListView) findViewById(R.id.list);
+
+        // Cari referensi pada layout
+        emptyView = (TextView) findViewById(R.id.empty_list);
+
+        // show empty jika tidak ada data yang ditampilkan
+        earthquakeListView.setEmptyView(emptyView);
 
         // Buat adapter baru yang mengambil daftar kosong gempa sebagai inputnyaåå
         mAdapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
@@ -82,13 +107,89 @@ public class EarthquakeActivity extends AppCompatActivity {
             }
         });
 
-        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-        task.execute(USGS_REQUEST_URL);
+        //AsyncTask
+        //EarthquakeAsyncTask task = new EarthquakeAsyncTask();
+        //task.execute(USGS_REQUEST_URL);
 
+        //get service phone to check internet conection
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        //jika tidak ada koneksi maka tampil tidak ada koneksi
+        if(!isConnected){
+
+            emptyView.setText(R.string.tidakAdaKoneksi);
+
+            // Cari Referensi untuk progressbar
+            progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+            //progressbar hilang
+            progressBar.setVisibility(View.GONE);
+
+        }else{
+            //AsyncTask With LoaderManager
+            LoaderManager loaderManager = getLoaderManager();
+
+            loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+        }
 
     }
 
-    class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>>{
+    @Override
+    public Loader<List<Earthquake>> onCreateLoader(int i, Bundle args) {
+        Log.v("Loader OnCreated : ","Run");
+        return new EarthquakeLoader(this, USGS_REQUEST_URL);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> data) {
+        Log.v("Loader OnFinish : ","Run");
+        // Bersihkan adapter dari data gempa sebelumnya
+        mAdapter.clear();
+
+        // Jika ada daftar {@link Earthquake} yang valid, tambahkan ke data set adapter.
+        // Ini akan memicu pembaruan ListView..
+        if (data != null && !data.isEmpty()) {
+            mAdapter.addAll(data);
+        }
+
+        // Cari Referensi untuk progressbar
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        //progressbar hilang
+        progressBar.setVisibility(View.GONE);
+
+        //empty text
+        emptyView.setText(R.string.kosong);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Earthquake>> loader) {
+        Log.v("Loader OnReset : ","Run");
+        mAdapter.clear();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    //Old AsyncTask
+    /*class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>>{
 
         @Override
         protected List<Earthquake> doInBackground(String... urls) {
@@ -110,6 +211,5 @@ public class EarthquakeActivity extends AppCompatActivity {
                 mAdapter.addAll(data);
             }
         }
-    }
-
+    }*/
 }

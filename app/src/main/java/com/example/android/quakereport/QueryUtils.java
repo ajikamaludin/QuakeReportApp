@@ -84,6 +84,7 @@ public final class QueryUtils {
             urlConnection.setReadTimeout(10000 /* milliseconds */);
             urlConnection.setConnectTimeout(15000 /* milliseconds */);
             urlConnection.setRequestMethod("GET");
+            urlConnection.setInstanceFollowRedirects(false);
             urlConnection.connect();
 
             // If the request was successful (response code 200),
